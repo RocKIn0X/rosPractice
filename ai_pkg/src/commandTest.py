@@ -5,8 +5,8 @@ import rospy
 from std_msgs.msg import String
 
 if __name__ == '__main__':
-    pub = rospy.Publisher('direction', string, queue_size=10)
-    rospy.init_node('client', anonymous=True)
+    pub = rospy.Publisher('dir', string, queue_size=10)
+    rospy.init_node('clientTest', anonymous=True)
     rate = rospy.Rate(10)
     while not rospy.is_shutdown():
         int n = 0;
