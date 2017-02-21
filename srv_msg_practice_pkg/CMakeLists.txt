@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(srv_msg_pkg)
+project(srv_msg_practice_pkg)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -99,7 +99,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES srv_msg_pkg
+#  LIBRARIES srv_msg_practice_pkg
 #  CATKIN_DEPENDS std_msgs
 #  DEPENDS system_lib
 )
@@ -116,24 +116,24 @@ include_directories(
 )
 
 ## Declare a C++ library
-# add_library(srv_msg_pkg
-#   src/${PROJECT_NAME}/srv_msg_pkg.cpp
+# add_library(srv_msg_practice_pkg
+#   src/${PROJECT_NAME}/srv_msg_practice_pkg.cpp
 # )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(srv_msg_pkg ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(srv_msg_practice_pkg ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-# add_executable(srv_msg_pkg_node src/srv_msg_pkg_node.cpp)
+# add_executable(srv_msg_practice_pkg_node src/srv_msg_practice_pkg_node.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(srv_msg_pkg_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(srv_msg_practice_pkg_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(srv_msg_pkg_node
+# target_link_libraries(srv_msg_practice_pkg_node
 #   ${catkin_LIBRARIES}
 # )
 
@@ -152,7 +152,7 @@ include_directories(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS srv_msg_pkg srv_msg_pkg_node
+# install(TARGETS srv_msg_practice_pkg srv_msg_practice_pkg_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -177,7 +177,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_srv_msg_pkg.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_srv_msg_practice_pkg.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
