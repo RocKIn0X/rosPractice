@@ -186,3 +186,8 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+include_directories(include ${catkin_INCLUDE_DIRS})
+add_executable(subscriber_control src/subscriber_control_cpp.cpp)
+target_link_libraries(subscriber_control ${catkin_LIBRARIES})
+
