@@ -1,0 +1,7 @@
+# Ai sent to Control
+char vertical
+char horizon
+---
+# Control sent to Ai
+float z
+float y
