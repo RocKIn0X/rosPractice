@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 
 import rospy
-from srv_msg_pkg.srv import *
-from srv_msg_pkg.msg import *
-from std_msgs.msg import String
+from srv_msg_practice_pkg.srv import *
+from srv_msg_practice_pkg.msg import *
+from std_msgs.msg import String, float
 
-float x_min = 50
-float x_max = 75
-float y_min = 50
-float y_max = 75
+x_min = 50
+x_max = 75
+y_min = 50
+y_max = 75
 
-bool center = False
+center = False
 
 def checkCenterX(x):
     return x >= x_min and x <= x_max
@@ -34,16 +34,18 @@ def commandControl(x, y):
         elif (checkCenterX(x) and checkCenterY(y)):
             dir = "center"
             center = True
-
+        
         rospy.loginfo(dir)
         pub.publish(dir)
         rate.sleep()
 
 if __name__ == '__main__':
     rospy.init_node('node_client', anonymous=True)
-    rospy.wait_for_service('vision_srv')
-    client = rospy.ServiceProxy('vision_srv', vision)
-    print center
+    rospy.wait_for_service('name_service')
+    client = rospy.ServiceProxy('name_service', vision_service)
+    #print center
     data = client(center)
     data = data.data
-    commandControl(data.x, data.y)
+    #commandControl(data.x, data.y)
+    print "x = " + data.x
+    print "y = " + data.y
