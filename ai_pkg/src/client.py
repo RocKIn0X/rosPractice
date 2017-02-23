@@ -3,14 +3,12 @@
 import rospy
 from srv_msg_practice_pkg.srv import *
 from srv_msg_practice_pkg.msg import *
-from std_msgs.msg import String, float
 
 x_min = 50
 x_max = 75
 y_min = 50
 y_max = 75
 
-center = False
 
 def checkCenterX(x):
     return x >= x_min and x <= x_max
@@ -19,6 +17,7 @@ def checkCenterY(y):
     return y >= y_min and y <= y_max
 
 def commandControl(x, y):
+    global center
     pub = rospy.Publisher('direction', string, queue_size=10)
     rospy.init_node('client', anonymous=True)
     rate = rospy.Rate(10)
@@ -40,6 +39,8 @@ def commandControl(x, y):
         rate.sleep()
 
 if __name__ == '__main__':
+    global center 
+    center = False
     rospy.init_node('node_client', anonymous=True)
     rospy.wait_for_service('name_service')
     client = rospy.ServiceProxy('name_service', vision_service)
