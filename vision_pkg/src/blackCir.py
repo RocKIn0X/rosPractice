@@ -12,49 +12,50 @@ cap = cv2.VideoCapture(0)
 
 def callback(req):
     res = vision_position()
-    while(True):
-        ret, frame = cap.read()
+    if not(req.isdetected):
+        while(True):
+            ret, frame = cap.read()
 
-        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        red = cv2.inRange(hsv, lower_red, upper_red)
-        red1 = cv2.inRange(hsv, lower_red1, upper_red1)
-        realRed = red1
-        # cv2.imshow('img_show', black)
-        # gray = cv2.cvtColor(black, cv2.COLOR_HSV2GRAY)
-        
-        rett, thresh = cv2.threshold(realRed, 127, 255, cv2.THRESH_BINARY)
+            hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+            red = cv2.inRange(hsv, lower_red, upper_red)
+            red1 = cv2.inRange(hsv, lower_red1, upper_red1)
+            realRed = red1
+            # cv2.imshow('img_show', black)
+            # gray = cv2.cvtColor(black, cv2.COLOR_HSV2GRAY)
+            
+            rett, thresh = cv2.threshold(realRed, 127, 255, cv2.THRESH_BINARY)
 
-        circles = cv2.HoughCircles(realRed,cv2.HOUGH_GRADIENT,4,60,
-                                param1=100,param2=150,minRadius=90,maxRadius=120)
-
-
-        print(circles)
-        # circles = np.unint(np.around(circles))
-        if not(circles == None):
-            res.x = circles[0]
-            res.y = circles[1]
-            cap.release()
-            cv2.destroyAllWindow()
-            return res 
-           
-            # for i in circles[0,:]:
-            #     # draw the outer circle
-            #     cv2.circle(frame,(i[0],i[1]),i[2],(0,255,0),2)
-            #     # draw the center of the circle
-            #     cv2.circle(frame,(i[0],i[1]),2,(0,0,255),3)
-
-        
-        # cv2.imshow('red_img', realRed)
-        # cv2.imshow('img_show', frame)
-        # cv2.imshow('tresh', thresh)
-        # cv2.imshow('img_show', black)
+            circles = cv2.HoughCircles(realRed,cv2.HOUGH_GRADIENT,4,60,
+                                    param1=100,param2=150,minRadius=90,maxRadius=120)
 
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+            print(circles)
+            # circles = np.unint(np.around(circles))
+            if not(circles == None):
+                res.x = circles[0]
+                res.y = circles[1]
+                cap.release()
+                cv2.destroyAllWindow()
+                return res 
+            
+                # for i in circles[0,:]:
+                #     # draw the outer circle
+                #     cv2.circle(frame,(i[0],i[1]),i[2],(0,255,0),2)
+                #     # draw the center of the circle
+                #     cv2.circle(frame,(i[0],i[1]),2,(0,0,255),3)
 
-    cap.release()
-    cv2.destroyAllWindow()
+            
+            # cv2.imshow('red_img', realRed)
+            # cv2.imshow('img_show', frame)
+            # cv2.imshow('tresh', thresh)
+            # cv2.imshow('img_show', black)
+
+
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+        cap.release()
+        cv2.destroyAllWindow()
 
 if __name__ == '__main__':
     rospy.init_node('node_service', anonymous=True)
