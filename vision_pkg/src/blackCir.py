@@ -1,9 +1,13 @@
+#!/usr/bin/env python
+
 import cv2
 import numpy as np
+import rospy
 from srv_msg_practice_pkg.srv import vision_service
 from srv_msg_practice_pkg.msg import vision_position
 # import cv2.cv as cv
 
+# flatten = lambda l: [item for sublist in l for item in sublist]
 lower_red = np.array([0,100,150])
 upper_red = np.array([15,255,255])
 lower_red1 = np.array([165,100,150])
@@ -12,7 +16,7 @@ cap = cv2.VideoCapture(0)
 
 def callback(req):
     res = vision_position()
-    if not(req.isdetected):
+    if not(req.isDetected):
         while(True):
             ret, frame = cap.read()
 
@@ -32,10 +36,16 @@ def callback(req):
             print(circles)
             # circles = np.unint(np.around(circles))
             if not(circles == None):
-                res.x = circles[0]
-                res.y = circles[1]
+                print(type(circles))
+                
+                circleList = circles.tolist()[:2]
+                print circleList
+                res.x = circleList[0][0][0]
+                res.y = circleList[0][0][1]
+                print res.x
+                print res.y
                 cap.release()
-                cv2.destroyAllWindow()
+                # cv2.destroyAllWindow()
                 return res 
             
                 # for i in circles[0,:]:
@@ -44,7 +54,7 @@ def callback(req):
                 #     # draw the center of the circle
                 #     cv2.circle(frame,(i[0],i[1]),2,(0,0,255),3)
 
-            
+                
             # cv2.imshow('red_img', realRed)
             # cv2.imshow('img_show', frame)
             # cv2.imshow('tresh', thresh)
