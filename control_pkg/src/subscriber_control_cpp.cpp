@@ -11,7 +11,7 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "node_subscriber");
     ros::NodeHandle n;
     // subscribe node name is /topic_publisher
-    ros::Subscriber sub = n.subscribe("dir", 1000, callback);
+    ros::Subscriber sub = n.subscribe("direction", 1000, callback);
     ros::spin();
 
     return 0;
