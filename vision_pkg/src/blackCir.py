@@ -35,6 +35,8 @@ def callback(req):
 
             print(circles)
             # circles = np.unint(np.around(circles))
+            
+
             if not(circles == None):
                 print(type(circles))
                 
@@ -44,7 +46,8 @@ def callback(req):
                 res.y = circleList[0][0][1]
                 print res.x
                 print res.y
-                cap.release()
+                
+                # cap.release()
                 # cv2.destroyAllWindow()
                 return res 
             
@@ -53,9 +56,14 @@ def callback(req):
                 #     cv2.circle(frame,(i[0],i[1]),i[2],(0,255,0),2)
                 #     # draw the center of the circle
                 #     cv2.circle(frame,(i[0],i[1]),2,(0,0,255),3)
+            else:
+                res.x = 0
+                res.y = 0
+
+                return res
 
                 
-            # cv2.imshow('red_img', realRed)
+            cv2.imshow('red_img', realRed)
             # cv2.imshow('img_show', frame)
             # cv2.imshow('tresh', thresh)
             # cv2.imshow('img_show', black)
@@ -64,8 +72,8 @@ def callback(req):
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
-        cap.release()
-        cv2.destroyAllWindow()
+        # cap.release()
+        # cv2.destroyAllWindow()
 
 if __name__ == '__main__':
     rospy.init_node('node_service', anonymous=True)
